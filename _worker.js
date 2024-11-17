@@ -4085,7 +4085,7 @@ var SignJWT = class extends ProduceJWT {
 };
 
 // src/worker.js
-var userID = "89b3cbba-e6ac-485a-9481-976a0415eab9";
+var userID = "99021930-b67e-4fbb-9a01-ade94394345e";
 var trojanPassword = `bpb-trojan`;
 var proxyIPs = ["bpb.yousef.isegaro.com"];
 var defaultHttpPorts = ["80", "8080", "2052", "2082", "2086", "2095", "8880"];
@@ -4093,7 +4093,7 @@ var defaultHttpsPorts = ["443", "8443", "2053", "2083", "2087", "2096"];
 var proxyIP = proxyIPs[Math.floor(Math.random() * proxyIPs.length)];
 var dohURL = "https://cloudflare-dns.com/dns-query";
 var hashPassword;
-var panelVersion = "2.7";
+var panelpanelVersion = "2.7777777";
 var worker_default = {
   /**
    * @param {import("@cloudflare/workers-types").Request} request
@@ -4233,7 +4233,7 @@ var worker_default = {
                 "CDN-Cache-Control": "no-store"
               }
             });
-          case "/panel":
+          case "/panelpanel":
             const pwd = await env.bpb.get("pwd");
             const isAuth = await Authenticate(request, env);
             if (request.method === "POST") {
@@ -4267,7 +4267,7 @@ var worker_default = {
             }
             const loginAuth = await Authenticate(request, env);
             if (loginAuth)
-              return Response.redirect(`${url.origin}/panel`, 302);
+              return Response.redirect(`${url.origin}/panelpanel`, 302);
             let secretKey = await env.bpb.get("secretKey");
             if (!secretKey) {
               secretKey = generateSecretKey();
@@ -4311,7 +4311,7 @@ var worker_default = {
                 "Content-Type": "text/plain"
               }
             });
-          case "/panel/password":
+          case "/panelpanel/password":
             const oldPwd = await env.bpb.get("pwd");
             let passAuth = await Authenticate(request, env);
             if (oldPwd && !passAuth)
@@ -4328,7 +4328,7 @@ var worker_default = {
               }
             });
           default:
-            url.hostname = "www.speedtest.net";
+            url.hostname = "www.speedtestspeedtestspeedtest.net";
             url.protocol = "https:";
             request = new Request(url, request);
             return await fetch(request);
@@ -4597,9 +4597,9 @@ async function handleTCPOutBound(request, remoteSocket, addressRemote, portRemot
   }
   async function retry() {
     const { pathname } = new URL(request.url);
-    let panelProxyIP = pathname.split("/")[2];
-    panelProxyIP = panelProxyIP ? atob(panelProxyIP) : void 0;
-    const tcpSocket2 = await connectAndWrite(panelProxyIP || proxyIP || addressRemote, portRemote);
+    let panelpanelProxyIP = pathname.split("/")[2];
+    panelpanelProxyIP = panelpanelProxyIP ? atob(panelpanelProxyIP) : void 0;
+    const tcpSocket2 = await connectAndWrite(panelpanelProxyIP || proxyIP || addressRemote, portRemote);
     tcpSocket2.closed.catch((error) => {
       console.log("retry tcpSocket closed error", error);
     }).finally(() => {
@@ -4967,7 +4967,7 @@ async function getDataset(env) {
       throw new Error(`An error occurred while getting Warp configs - ${error}`);
     warpConfigs = configs;
   }
-  if (panelVersion !== proxySettings.panelVersion)
+  if (panelpanelVersion !== proxySettings.panelpanelVersion)
     proxySettings = await updateDataset(env);
   return { kvNotFound: false, proxySettings, warpConfigs };
 }
@@ -5051,7 +5051,7 @@ async function updateDataset(env, newSettings, resetSettings) {
     noiseSizeMax: validateField("noiseSizeMax") ?? currentSettings?.noiseSizeMax ?? "10",
     noiseDelayMin: validateField("noiseDelayMin") ?? currentSettings?.noiseDelayMin ?? "1",
     noiseDelayMax: validateField("noiseDelayMax") ?? currentSettings?.noiseDelayMax ?? "1",
-    panelVersion
+    panelpanelVersion
   };
   try {
     await env.bpb.put("proxySettings", JSON.stringify(proxySettings));
@@ -5100,7 +5100,7 @@ async function getConfigAddresses(hostName, cleanIPs, enableIPv6) {
   const defaultIPv6 = enableIPv6 ? resolved.ipv6.map((ip) => `[${ip}]`) : [];
   return [
     hostName,
-    "www.speedtest.net",
+    "www.speedtestspeedtestspeedtest.net",
     ...resolved.ipv4,
     ...defaultIPv6,
     ...cleanIPs ? cleanIPs.split(",") : []
@@ -5193,7 +5193,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BPB Panel ${panelVersion}</title>
+        <title>BPB panelpanel ${panelpanelVersion}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <title>Collapsible Sections</title>
@@ -5484,7 +5484,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
         </style>
     </head>
     <body>
-        <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> \u{1F4A6}</h1>
+        <h1>BPB panelpanel <span style="font-size: smaller;">${panelpanelVersion}</span> \u{1F4A6}</h1>
         <div class="form-container">
             <form id="configForm">
                 <details open>
@@ -6145,7 +6145,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             <hr>
             <div class="footer">
                 <i class="fa fa-github" style="font-size:36px; margin-right: 10px;"></i>
-                <a class="link" href="https://github.com/bia-pain-bache/BPB-Worker-Panel" style="color: var(--color); text-decoration: underline;" target="_blank">Github</a>
+                <a class="link" href="#" style="color: var(--color); text-decoration: underline;" target="_blank">Github</a>
                 <button id="openModalBtn" class="button">Change Password</button>
                 <button type="button" id="logout" style="background: none; color: var(--color); margin: 0; border: none; cursor: pointer;">
                     <i class="fa fa-power-off fa-2x" aria-hidden="true"></i>
@@ -6226,7 +6226,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                 qrcodeContainer.lastElementChild.remove();
             });
             resetSettings.addEventListener('click', async () => {
-                const confirmReset = confirm('\u26A0\uFE0F This will reset all panel settings.\\nAre you sure?');
+                const confirmReset = confirm('\u26A0\uFE0F This will reset all panelpanel settings.\\nAre you sure?');
                 if(!confirmReset) return;
                 const formData = new FormData();
                 formData.append('resetSettings', 'true');
@@ -6235,7 +6235,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                     const refreshButtonVal = refreshBtn.innerHTML;
                     refreshBtn.innerHTML = '\u231B Loading...';
 
-                    const response = await fetch('/panel', {
+                    const response = await fetch('/panelpanel', {
                         method: 'POST',
                         body: formData,
                         credentials: 'include'
@@ -6244,7 +6244,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                     document.body.style.cursor = 'default';
                     refreshBtn.innerHTML = refreshButtonVal;
                     if (response.ok) {
-                        alert('\u2705 Panel settings reset to default successfully! \u{1F60E}');
+                        alert('\u2705 panelpanel settings reset to default successfully! \u{1F60E}');
                         window.location.reload(true);
                     } else {
                         const errorMessage = await response.text();
@@ -6479,7 +6479,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                 const applyButtonVal = applyButton.value;
                 applyButton.value = '\u231B Loading...';
 
-                const response = await fetch('/panel', {
+                const response = await fetch('/panelpanel', {
                     method: 'POST',
                     body: formData,
                     credentials: 'include'
@@ -6545,7 +6545,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             }
                     
             try {
-                const response = await fetch('/panel/password', {
+                const response = await fetch('/panelpanel/password', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'text/plain'
@@ -6683,7 +6683,7 @@ function renderLoginPage() {
     </head>
     <body>
         <div class="container">
-            <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> \u{1F4A6}</h1>
+            <h1>BPB panelpanel <span style="font-size: smaller;">${panelpanelVersion}</span> \u{1F4A6}</h1>
             <div class="form-container">
                 <h2>User Login</h2>
                 <form id="loginForm">
@@ -6712,7 +6712,7 @@ function renderLoginPage() {
                 });
             
                 if (response.ok) {
-                    window.location.href = '/panel';
+                    window.location.href = '/panelpanel';
                 } else {
                     passwordError.textContent = '\u26A0\uFE0F Wrong Password!';
                     const errorMessage = await response.text();
@@ -6765,9 +6765,9 @@ function renderErrorPage(message2, error, refer) {
     </head>
     <body>
         <div id="error-container">
-            <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> \u{1F4A6}</h1>
+            <h1>BPB panelpanel <span style="font-size: smaller;">${panelpanelVersion}</span> \u{1F4A6}</h1>
             <div id="error-message">
-                <h2>${message2} ${refer ? 'Please try again or refer to <a href="https://github.com/bia-pain-bache/BPB-Worker-Panel/blob/main/README.md">documents</a>' : ""}
+                <h2>${message2} ${refer ? 'Please try again or refer to <a href="https://github.com/bia-pain-bache/BPB-Worker-panelpanel/blob/main/README.md">documents</a>' : ""}
                 </h2>
                 <p><b>${error ? `\u26A0\uFE0F ${error.stack.toString()}` : ""}</b></p>
             </div>
@@ -6907,7 +6907,7 @@ async function buildXrayDNS(proxySettings, outboundAddrs, domainToStaticIPs, isW
   if (isWorkerLess) {
     const resolvedDOH = await resolveDNS("cloudflare-dns.com");
     const resolvedCloudflare = await resolveDNS("cloudflare.com");
-    const resolvedCLDomain = await resolveDNS("www.speedtest.net.cdn.cloudflare.net");
+    const resolvedCLDomain = await resolveDNS("www.speedtestspeedtestspeedtest.net.cdn.cloudflare.net");
     const resolvedCFNS_1 = await resolveDNS("ben.ns.cloudflare.com");
     const resolvedCFNS_2 = await resolveDNS("lara.ns.cloudflare.com");
     dnsObject.hosts["cloudflare-dns.com"] = [
